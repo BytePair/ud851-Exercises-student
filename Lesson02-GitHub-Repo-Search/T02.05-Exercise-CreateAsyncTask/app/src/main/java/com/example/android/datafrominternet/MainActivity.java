@@ -83,7 +83,9 @@ public class MainActivity extends AppCompatActivity {
         // Override onPostExecute to display the results in the TextView
         @Override
         protected void onPostExecute(String s) {
-            mSearchResultsTextView.setText(s);
+            if (s != null && !s.equals("")) {
+                mSearchResultsTextView.setText(s);
+            }
             super.onPostExecute(s);
         }
     }
