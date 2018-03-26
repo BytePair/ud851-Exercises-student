@@ -16,6 +16,7 @@
 package com.example.android.asynctaskloader.utilities;
 
 import android.net.Uri;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,6 +29,8 @@ import java.util.Scanner;
  * These utilities will be used to communicate with the network.
  */
 public class NetworkUtils {
+
+    final static String TAG = NetworkUtils.class.getSimpleName();
 
     final static String GITHUB_BASE_URL =
             "https://api.github.com/search/repositories";
@@ -71,6 +74,7 @@ public class NetworkUtils {
      * @throws IOException Related to network and stream reading
      */
     public static String getResponseFromHttpUrl(URL url) throws IOException {
+        Log.d(TAG, "getResponseFromHttpUrl");
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         try {
             InputStream in = urlConnection.getInputStream();
