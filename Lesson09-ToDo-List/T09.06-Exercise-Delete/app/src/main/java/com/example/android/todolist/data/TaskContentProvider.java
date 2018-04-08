@@ -165,12 +165,15 @@ public class TaskContentProvider extends ContentProvider {
         int result;
         switch (match) {
             case TASK_WITH_ID:
+                // Get the task ID from the URI path
+                String id = uri.getPathSegments().get(1);
+                // Use selections/selectionArgs to filter for this ID
                 result = db.delete(
                         TABLE_NAME,
-                        selection,
-                        selectionArgs);
-                if (!(result > 0)) {
-                    throw new android.database.SQLException("Failed to delete row: " + uri);
+                        "_id=?",
+                        new String[]{id});
+                if (result == 0) {
+                    throw new android.database.SQLException("Failed to delete task: " + id);
                 }
                 break;
             // Default exception
